@@ -26,8 +26,7 @@ export const MEALS = [
         '4. Cut onions in small pieces','5. Fry Onion pieces','6. Mix all ingerdiants and fry for 15 mins'],
         'https://www.halfbakedharvest.com/wp-content/uploads/2019/05/20-Minute-Garlic-Basil-Brown-Butter-Pasta-4.jpg',
         true,
-        true,
-        true,
+        false,
         true
     ),
     new Meal(
@@ -40,8 +39,7 @@ export const MEALS = [
         ['1. Take Cheese and fry','2. Take Pasta and deep fry it','3. Wash Penne properly for 15 mins',
         '4. Cut onions in small pieces','5. Fry Onion pieces','6. Mix all ingerdiants and fry for 15 mins'],
         'https://media4.s-nbcnews.com/j/newscms/2019_40/1488656/mark-bittman-today-main-191002-04_b23f77b6cc5251edca83d8cbf855cf89.today-inline-large.jpg',
-        true,
-        true,
+        false,
         true,
         true
     ),
@@ -52,8 +50,8 @@ export const MEALS = [
         'Brownie',
         20,
         ['Wheat', 'Corn Flour', 'Sugar', 'Salt', 'Cocoa powder'],
-        '1. Take Wheat and mix Corn flour in it \n 2. Mix water in it \n 3. Add necessary sugar, salt in it \n'+
-        +' 4. Add Cocoa powder \n 5. Bake it in oven for 15 mins',
+        ['1. Take Wheat and mix Corn flour in it','2. Mix water in it','3. Add necessary sugar, salt in it',
+        ' 4. Add Cocoa powder ','5. Bake it in oven for 15 mins'],
         'https://www.seriouseats.com/2018/03/20180413-brownie-mix-vicky-wasik-20.jpg',
         true,
         false,
@@ -66,8 +64,8 @@ export const MEALS = [
         'Muffin',
         20,
         ['Wheat', 'Corn Flour', 'Sugar', 'Salt'],
-        '1. Take Wheat and mix Corn flour in it \n 2. Mix water in it \n 3. Add necessary sugar, salt in it \n'+
-        +'\n 4. Bake it in oven for 15 mins',
+        ['1. Take Wheat and mix Corn flour in it',' 2. Mix water in it ',' 3. Add necessary sugar, salt in it',
+        ' 4. Bake it in oven for 15 mins'],
         'https://www.cookingclassy.com/wp-content/uploads/2018/10/pumpkin-muffins-20.jpg',
         true,
         false,

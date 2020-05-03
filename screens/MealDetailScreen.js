@@ -1,20 +1,36 @@
-import React from 'react'
+import React, {useEffect, useCallback} from 'react'
 import { View, ScrollView, Text, Button, StyleSheet,Image } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
-import { MEALS } from '../data/dummy-data';
 import HeaderButton from '../components/HeaderButton'
 import DefaultText from '../components/DefaultText';
+import {useSelector, useDispatch} from 'react-redux'
+import { toggleFavourites } from '../store/action/meals';
+
 
 const ListItem = props => {
     return (
         <View style={styles.listItem}>
-            <DefaultText>{props.children}</DefaultText>
+            <DefaultText>{props.children}</DefaultText> 
         </View>
     );
 }
 const MealDetailScreen = props => {
     const mealId = props.navigation.getParam('mealId');
-    const selectedMeal = MEALS.find(meal => meal.id === mealId);
+    const meals = useSelector(state => state.meals.allMeals)
+    const selectedMeal = meals.find(meal => meal.id === mealId);
+    console.log(selectedMeal.title);
+    
+
+    const dispatch = useDispatch();
+
+    const toggleFavHandler = useCallback(() => {
+        console.log('Dispatching...'); 
+        dispatch(toggleFavourites(selectedMeal.id))
+    }, [dispatch, mealId]) 
+
+    useEffect(() =>{
+        props.navigation.setParams({toggleFav: toggleFavHandler, mealTitle: selectedMeal.title});
+    }, [toggleFavHandler, selectedMeal.title])
     return (
         <ScrollView>
             <Image source={{uri: selectedMeal.imageUrl}} style={styles.image}/>
@@ -34,15 +50,14 @@ const MealDetailScreen = props => {
 };
 
 MealDetailScreen.navigationOptions = (navigationData) => {
-    const mealId = navigationData.navigation.getParam('mealId');
-    console.log("mealId " + mealId)
-    const selectedMeal = MEALS.find(meal => meal.id === mealId);
-    console.log("selectedMeal " + selectedMeal.title)
+    const toggleFavHandler = navigationData.navigation.getParam('toggleFav');
+    const selectedMealTitle = navigationData.navigation.getParam('mealTitle');
+    console.log("selectedMeal " + selectedMealTitle) 
     return {
-        headerTitle: selectedMeal.title,
-        headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item iconName='ios-star' onPress={() => { console.log('favourite pressed') }} />
-        </HeaderButtons>
+        headerTitle: selectedMealTitle, 
+        headerRight: () => (<HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item title='Favourites' iconName='ios-star' onPress={toggleFavHandler} />
+        </HeaderButtons>)
     }
 }
 
@@ -59,7 +74,7 @@ const styles = StyleSheet.create({
 
     },
     title: {
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'open-sans-bold', 
         fontSize: 22,
         textAlign: 'center' 
     },
@@ -72,4 +87,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MealDetailScreen;
+export default MealDetailScreen; 
